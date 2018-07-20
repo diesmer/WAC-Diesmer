@@ -10,7 +10,6 @@ public class PostgresBaseDao {
 		Connection result = null;
 
 		try {
-			
 			InitialContext ic = new InitialContext();
 			DataSource datasource = (DataSource) ic.lookup("java:comp/env/jdbc/PostgresDS");
 			
