@@ -6,12 +6,10 @@ import java.util.List;
 //import domain.Account;
 import nl.hu.v1wac.firstapp.persistence.CountryDao;
 import nl.hu.v1wac.firstapp.persistence.CountryPostgresDaoImpl;
-//import persistence.UserDao;
-//import persistence.UserPostgresDaoImpl;
 
 public class WorldService {
 	
-	private CountryDao countryDAO = new CountryPostgresDaoImpl();
+	CountryDao countryDAO = new CountryPostgresDaoImpl();
 	//private UserDao userDAO = new UserPostgresDaoImpl();
 
 	
@@ -40,51 +38,25 @@ public class WorldService {
 		return result;
 	}
 
-	public Country updateCountry(String code, String name, String capital, String region, double surface, int population) throws SQLException {
-		Country c = countryDAO.findByCode(code);
-			c.setName(name);
-			c.setCapital(capital);
-			c.setRegion(region);
-			c.setSurface(surface);
-			c.setPopulation(population);
+	public boolean updateCountry(Country c) throws SQLException {
+		boolean resultaat = false;
 			if(countryDAO.update(c)) {
-				return countryDAO.findByCode(code);
-			}
+				resultaat = countryDAO.update(c);
+			} else
+				System.out.println("lukt nie");
 			
 		
-		return c;
+		return resultaat;
 	}
 	
 	
-	public Country addCountry(String code, String iso3, String name, String continent, String region, 
-			double surface, int indepyear, int population, int lifeexpectancy, 
-			int gnp, int gnpoid, String localname, String governmentform,
-			String headofstate, double latitude, double longitude, String capital) throws SQLException {
-		Country c = new Country(code, iso3, name, continent, region, surface, indepyear, population, 
-								lifeexpectancy, gnp, gnpoid, localname, governmentform, 
-								headofstate, latitude, longitude, capital);
-		c.setCode(code);
-		c.setIso3(iso3);
-		c.setName(name);
-		c.setContinent(continent);
-		c.setRegion(region);
-		c.setSurface(surface);
-		c.setIndepyear(indepyear);
-		c.setPopulation(population);
-		c.setLifeexpectancy(lifeexpectancy);
-		c.setGnp(gnpoid);
-		c.setGnpoid(gnpoid);
-		c.setLocalname(localname);
-		c.setGovernment(governmentform);
-		c.setHeadofstate(headofstate);
-		c.setLatitude(latitude);
-		c.setLongitude(longitude);
-		c.setCapital(capital);
-		
-		if(countryDAO.create(c)) {
-			return c;
-		}
-		return c;
+	public boolean addCountry(Country c) throws SQLException {
+		boolean resultaat = false;
+		if(c!=null) {
+			resultaat = countryDAO.create(c);
+		} else
+			throw new IllegalArgumentException("Toevoegen niet gelukt");
+		return resultaat;
 	}
 	
 	
@@ -100,7 +72,7 @@ public class WorldService {
 	}
 	
 
-	public Country createCountry(String nm, String em) {
+	public Country createCountry(String nm) {
 		// TODO Auto-generated method stub
 		return null;
 	}

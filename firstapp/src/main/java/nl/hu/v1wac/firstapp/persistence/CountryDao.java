@@ -15,10 +15,10 @@ public interface CountryDao {
 
 	public List<Country> find10LargestSurfaces();
 
-	public boolean update(Country country) throws SQLException;
+	public boolean update(Country c) throws SQLException;
 
-	public boolean delete(Country country);
+	public boolean delete(Country c);
 
-	public boolean create(Country country) throws SQLException;
+	public boolean create(Country c) throws SQLException;
 
 }

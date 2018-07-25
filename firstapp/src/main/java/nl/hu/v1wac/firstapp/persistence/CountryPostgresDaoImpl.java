@@ -77,23 +77,24 @@ public class CountryPostgresDaoImpl extends PostgresBaseDao implements CountryDa
 	}
 	
 	/***************************** UPDATE methods *****************************/
-	public boolean update(Country country) throws SQLException {
+	public boolean update(Country c) throws SQLException {
 		System.out.println("test1");
-		System.out.println(country.getName());
+		System.out.println(c.getName());
 		boolean resultaat  = false;
 		
-		boolean countryBestaat = findByCode(country.getCode()) != null;
+		boolean countryBestaat = findByCode(c.getCode()) != null;
 		if (countryBestaat) {
-			String query = "UPDATE COUNTRY SET NAME = ?, CAPITAL = ?, REGION = ?, SURFACEAREA = ?, POPULATION = ? WHERE CODE = '" + country.getCode() + "'";
+			System.out.print("land bestaat");
+			String query = "UPDATE country SET name = '" + c.getName() + "', capital = '" + c.getCapital()
+			+ "', continent = '" + c.getContinent() + "', region = '" + c.getRegion() + "', surfacearea = "
+			+ c.getSurface() + ", population = " + c.getPopulation() + ", governmentform = '"
+			+ c.getGovernment() + "', latitude = " + c.getLatitude() + ", longitude = " + c.getLongitude()
+			+ " WHERE code = '" + c.getCode() + "'";
 			try (Connection con = super.getConnection()) {
+				System.out.println(query);
 				PreparedStatement pstmt = con.prepareStatement(query);
-				System.out.println(country.getName() + " " + country.getCapital());
-				
-				pstmt.setString(1, country.getName());
-				pstmt.setString(2, country.getCapital());
-				pstmt.setString(3, country.getRegion());
-				pstmt.setDouble(4, country.getSurface());
-				pstmt.setInt(5, country.getPopulation());			
+				System.out.println(c.getName() + " " + c.getCapital());
+		
 				int result = pstmt.executeUpdate();
 				pstmt.close();
 				
@@ -172,5 +173,6 @@ public class CountryPostgresDaoImpl extends PostgresBaseDao implements CountryDa
 		
 		return resultaat;
 	}
+
 
 }
