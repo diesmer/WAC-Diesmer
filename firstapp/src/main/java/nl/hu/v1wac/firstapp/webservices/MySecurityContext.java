@@ -9,9 +9,9 @@ public class MySecurityContext implements SecurityContext {
 	private boolean isSecure;
 
 	public MySecurityContext(String name, String role, boolean isSecure) {
- this.name = name;
- this.role = role;
- }
+		this.name = name;
+		this.role = role;
+	}
 
 	public Principal getUserPrincipal() {
 		return new Principal() {

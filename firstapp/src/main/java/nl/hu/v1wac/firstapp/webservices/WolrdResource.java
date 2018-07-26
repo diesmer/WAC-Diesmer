@@ -92,7 +92,7 @@ public class WolrdResource {
 	}
 
 	@PUT
-	@RolesAllowed("admin")
+	@RolesAllowed("admi")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Path("/update/{data}")
 	public Response updateCountry(String data) throws SQLException {
@@ -115,7 +115,6 @@ public class WolrdResource {
 	}
 
 	@DELETE
-	@RolesAllowed("admi")
 	@Path("/delete/{code}")
 	public Response deletecountry(@PathParam("code") String code) {
 		WorldService service = ServiceProvider.getWorldService();

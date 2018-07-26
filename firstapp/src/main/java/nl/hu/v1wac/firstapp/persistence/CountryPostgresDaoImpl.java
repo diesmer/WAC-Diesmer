@@ -39,7 +39,6 @@ public class CountryPostgresDaoImpl extends PostgresBaseDao implements CountryDa
 				Country newCountry = new Country(code, iso3, name, capital, continent, region, surfacearea, population,
 						governmentform, latitude, longitude);
 				results.add(newCountry);
-				System.out.println("Results");
 
 			}
 		} catch (SQLException sqle) {
